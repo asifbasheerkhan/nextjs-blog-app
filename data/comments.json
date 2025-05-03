@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "postId": 4,
+    "comment": "asassasa"
+  },
+  {
+    "id": 2,
+    "postId": 4,
+    "comment": "dsadsadsa"
+  },
+  {
+    "id": 3,
+    "postId": 4,
+    "comment": "sdadsadasdsadadsad"
+  },
+  {
+    "id": 4,
+    "postId": 5,
+    "comment": "asif "
+  },
+  {
+    "id": 5,
+    "postId": 5,
+    "comment": "sadsadasd"
+  },
+  {
+    "id": 6,
+    "postId": 1,
+    "comment": "dsaads"
+  },
+  {
+    "id": 7,
+    "postId": 2,
+    "comment": "asdhsadhsaddah"
+  },
+  {
+    "id": 8,
+    "postId": 2,
+    "comment": "asdsadsadad"
+  },
+  {
+    "id": 9,
+    "postId": 2,
+    "comment": "asif basheer khan"
+  },
+  {
+    "id": 10,
+    "postId": 2,
+    "comment": "dadsdada"
+  }
+]
