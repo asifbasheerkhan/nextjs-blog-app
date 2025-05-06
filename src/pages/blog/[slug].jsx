@@ -22,12 +22,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${slug}`
-  );
+  // const response = await fetch(
+  //   `https://jsonplaceholder.typicode.com/posts/${slug}`
+  // );
 
-  // const response = await axios.get(`http://localhost:8000/api/post/${slug}`);
-  const post = await response.json();
+  const response = await axios.get(`http://localhost:8000/api/post/${slug}`);
+  const post = await response.data;
 
   return {
     props: {
