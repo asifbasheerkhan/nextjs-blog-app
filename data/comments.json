@@ -48,5 +48,35 @@
     "id": 10,
     "postId": 2,
     "comment": "dadsdada"
+  },
+  {
+    "id": 11,
+    "postId": 1,
+    "comment": "okok"
+  },
+  {
+    "id": 12,
+    "postId": 1,
+    "comment": "xasd"
+  },
+  {
+    "id": 13,
+    "postId": 1,
+    "comment": "asasasasasasasa"
+  },
+  {
+    "id": 14,
+    "postId": 1,
+    "comment": "okokok"
+  },
+  {
+    "id": 15,
+    "postId": 1,
+    "comment": "dsa"
+  },
+  {
+    "id": 16,
+    "postId": 1,
+    "comment": "aaa"
   }
 ]

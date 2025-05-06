@@ -1,9 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 export async function getStaticProps() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  // const response = await axios.get("http://localhost:8000/api/posts");
   const posts = await response.json();
   return {
     props: {
@@ -27,8 +29,8 @@ const blog = ({ posts }) => {
               <Image
                 src={`https://picsum.photos/200/200?random=${post.id}`}
                 alt="Blog Post"
-                layout="fill"
-                objectFit="cover"
+                width={200}
+                height={200}
                 className="w-full h-full"
                 loading="lazy"
               />

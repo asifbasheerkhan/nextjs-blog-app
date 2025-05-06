@@ -32,10 +32,19 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // if (!loading) {
+    //   if (isAuthenticated) {
+    //     router.push("/");
+    //   } else {
+    //     router.push("/login");
+    //   }
+    // }
     if (!loading) {
-      if (isAuthenticated) {
+      const currentPath = router.pathname;
+
+      if (isAuthenticated && currentPath !== "/") {
         router.push("/");
-      } else {
+      } else if (!isAuthenticated && currentPath !== "/login") {
         router.push("/login");
       }
     }

@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export async function getStaticPaths() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  // const response = await axios.get("http://localhost:8000/api/posts");
   const posts = await response.json();
 
   const paths = posts.map((post) => ({
@@ -21,6 +23,8 @@ export async function getStaticProps({ params }) {
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${slug}`
   );
+
+  // const response = await axios.get(`http://localhost:8000/api/post/${slug}`);
   const post = await response.json();
 
   return {
