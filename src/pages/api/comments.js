@@ -3,23 +3,24 @@ import path from 'path';
 
 const filePath = path.join(process.cwd(), 'data', 'comments.json');
 
-const getComments = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) reject(err);
-      resolve(JSON.parse(data));
-    });
-  });
-};
+const getComments = async () => {
+    try {
+      const commentsData = await fs.promises.readFile(filePath, 'utf8');
+      return JSON.parse(commentsData);
+    } catch (err) {
+      console.error('Error reading file:', err);
+      throw new Error('Error reading comments data');
+    }
+  };
 
-const saveComments = (comments) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(filePath, JSON.stringify(comments, null, 2), (err) => {
-      if (err) reject(err);
-      resolve();
-    });
-  });
-};
+  const saveComments = async (comments) => {
+    try {
+      await fs.promises.writeFile(filePath, JSON.stringify(comments, null, 2));
+    } catch (err) {
+      console.error('Error writing file:', err);
+      throw new Error('Error saving comments');
+    }
+  };
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
