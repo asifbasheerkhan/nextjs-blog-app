@@ -44,7 +44,7 @@ const page = ({ post }) => {
       const response = await fetch(`/api/comments?postId=${post.id}`);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         setComments(data);
       } else {
@@ -63,7 +63,7 @@ const page = ({ post }) => {
       return;
     }
 
-    const response = await fetch('/api/comments', {
+    const response = await fetch('../pages/api/comments.jsx', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
