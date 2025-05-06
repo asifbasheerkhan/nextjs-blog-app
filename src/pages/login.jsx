@@ -2,14 +2,11 @@ import { Router, useRouter } from "next/router";
 import React, { useState } from "react";
 
 const login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
   const submitHandler = async (e) => {
-
-
     e.preventDefault();
     const response = await fetch("/api/login", {
       method: "POST",
@@ -20,13 +17,13 @@ const login = () => {
     });
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
-    if(response.ok) {
-        localStorage.setItem("token", data.token);
-        router.push('/')
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      // router.push('/')
+      window.location.href = "/";
     }
-
   };
 
   return (

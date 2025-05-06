@@ -2,8 +2,7 @@ import { log } from 'console';
 import fs from 'fs';
 import path from 'path';
 
-// const filePath = path.join(process.cwd(), 'data', 'comments.json');
-const filePath = path.join('data', 'comments.json');
+const filePath = path.join(process.cwd(), 'data', 'comments.json');
 // console.log(filePath);
 
 const getComments = () => {
@@ -29,7 +28,6 @@ export default function handler(req, res) {
         if(!postId || !comment) {
             return res.status(500).json({message: "The comment or postId is not there"});
         }
-        console.log(filePath);
         let comments = [];
 
 
