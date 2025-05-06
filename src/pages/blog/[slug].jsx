@@ -6,17 +6,27 @@ import login from "../login";
 
 export async function getStaticPaths() {
   // const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const response = await axios.get("https://nextjs-blog-app-2.onrender.com/api/posts");
-  const posts = await response.data;
+  try {
+    const response = await axios.get(
+      "https://nextjs-blog-app-2.onrender.com/api/posts"
+    );
+    const posts = await response.data;
 
-  const paths = posts.map((post) => ({
-    params: { slug: post.id.toString() },
-  }));
+    const paths = posts.map((post) => ({
+      params: { slug: post.id.toString() },
+    }));
 
-  return {
-    paths,
-    fallback: false,
-  };
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    console.error("Failed to fetch paths:", error);
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 }
 
 export async function getStaticProps({ params }) {
@@ -25,15 +35,25 @@ export async function getStaticProps({ params }) {
   // const response = await fetch(
   //   `https://jsonplaceholder.typicode.com/posts/${slug}`
   // );
+  try {
+    const response = await axios.get(
+      `https://nextjs-blog-app-2.onrender.com/api/post/${slug}`
+    );
+    const post = await response.data;
 
-  const response = await axios.get(`https://nextjs-blog-app-2.onrender.com/api/post/${slug}`);
-  const post = await response.data;
-
-  return {
-    props: {
-      post,
-    },
-  };
+    return {
+      props: {
+        post,
+      },
+    };
+  } catch (error) {
+    console.error(`Failed to fetch post ${slug}:`, error);
+    return {
+      props: {
+        post: null,
+      },
+    };
+  }
 }
 
 const page = ({ post }) => {
@@ -75,7 +95,6 @@ const page = ({ post }) => {
     });
 
     console.log(response);
-
 
     if (response.ok) {
       setMessage("Comment submitted successfully!");

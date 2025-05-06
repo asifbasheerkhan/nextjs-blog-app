@@ -7,13 +7,24 @@ import Navbar from "@/components/Navbar";
 
 export async function getStaticProps() {
   // const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const response = await axios.get("https://nextjs-blog-app-2.onrender.com/api/posts");
-  const posts = await response.data;
-  return {
-    props: {
-      posts,
-    },
-  };
+  try {
+    const response = await axios.get(
+      "https://nextjs-blog-app-2.onrender.com/api/posts"
+    );
+    const posts = await response.data;
+    return {
+      props: {
+        posts,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+    return {
+      props: {
+        posts: [],
+      },
+    };
+  }
 }
 
 const blog = ({ posts }) => {
