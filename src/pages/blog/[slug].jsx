@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import login from "../login";
 
 export async function getStaticPaths() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -72,6 +73,9 @@ const page = ({ post }) => {
         comment,
       }),
     });
+
+    console.log(response);
+
 
     if (response.ok) {
       setMessage("Comment submitted successfully!");
