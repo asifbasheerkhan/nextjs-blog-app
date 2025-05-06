@@ -1,53 +1,56 @@
-import { log } from 'console';
 import fs from 'fs';
 import path from 'path';
 
 const filePath = path.join(process.cwd(), 'data', 'comments.json');
-// console.log(filePath);
 
 const getComments = () => {
-const commentsData = fs.readFileSync(filePath, 'utf8');
-return JSON.parse(commentsData);
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) reject(err);
+      resolve(JSON.parse(data));
+    });
+  });
 };
 
-export default function handler(req, res) {
+const saveComments = (comments) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, JSON.stringify(comments, null, 2), (err) => {
+      if (err) reject(err);
+      resolve();
+    });
+  });
+};
 
-    if(req.method == 'GET') {
-        const {postId} = req.query;
-        const comments = getComments();
-        const postComments = comments.filter((comment) => comment.postId === parseInt(postId));
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    const { postId } = req.query;
+    try {
+      const comments = await getComments();
+      const postComments = comments.filter((comment) => comment.postId === parseInt(postId, 10));
+      res.status(200).json(postComments);
+    } catch (err) {
+      res.status(500).json({ message: 'Error fetching comments', error: err });
+    }
+  }
 
-
-        res.status(200).json(postComments);
-
+  if (req.method === 'POST') {
+    const { postId, comment } = req.body;
+    if (!postId || !comment) {
+      return res.status(400).json({ message: "Both postId and comment are required" });
     }
 
-    if (req.method === 'POST') {
-        const { postId, comment } = req.body;
-
-        if(!postId || !comment) {
-            return res.status(500).json({message: "The comment or postId is not there"});
-        }
-        let comments = [];
-
-
-
-        const data = fs.readFileSync(filePath, 'utf-8');
-
-        if(data.trim() !== '') {
-            comments = JSON.parse(data);
-        }
-
-        const newData = {
-            id: comments.length+1,
-            postId,
-            comment,
-        }
-
-        comments.push(newData);
-        fs.writeFileSync(filePath, JSON.stringify(comments, null, 2));
-        return res.status(200).json({ message: 'Comment added successfully', newData });
+    try {
+      let comments = await getComments();
+      const newData = {
+        id: comments.length + 1,
+        postId,
+        comment,
+      };
+      comments.push(newData);
+      await saveComments(comments);
+      return res.status(200).json({ message: 'Comment added successfully', newData });
+    } catch (err) {
+      return res.status(500).json({ message: 'Error saving comment', error: err });
     }
-
-
+  }
 }
