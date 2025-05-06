@@ -5,9 +5,9 @@ import React, { useEffect, useState } from "react";
 import login from "../login";
 
 export async function getStaticPaths() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  // const response = await axios.get("http://localhost:8000/api/posts");
-  const posts = await response.json();
+  // const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const response = await axios.get("https://nextjs-blog-app-2.onrender.com/api/posts");
+  const posts = await response.data;
 
   const paths = posts.map((post) => ({
     params: { slug: post.id.toString() },
@@ -26,7 +26,7 @@ export async function getStaticProps({ params }) {
   //   `https://jsonplaceholder.typicode.com/posts/${slug}`
   // );
 
-  const response = await axios.get(`http://localhost:8000/api/post/${slug}`);
+  const response = await axios.get(`https://nextjs-blog-app-2.onrender.com/api/post/${slug}`);
   const post = await response.data;
 
   return {
