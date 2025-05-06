@@ -41,7 +41,7 @@ const page = ({ post }) => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      const response = await fetch(`/api/comments?postId=${post.id}`);
+      const response = await fetch(`../api/comments?postId=${post.id}`);
       if (response.ok) {
         const data = await response.json();
         // console.log(data);
@@ -63,7 +63,7 @@ const page = ({ post }) => {
       return;
     }
 
-    const response = await fetch('../pages/api/comments.jsx', {
+    const response = await fetch('../api/comments.jsx', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const page = ({ post }) => {
     if (response.ok) {
       setMessage("Comment submitted successfully!");
       setComment('');
-      const newCommentsResponse = await fetch(`/api/comments?postId=${post.id}`);
+      const newCommentsResponse = await fetch(`../api/comments?postId=${post.id}`);
       const newCommentsData = await newCommentsResponse.json();
       setComments(newCommentsData);
     } else {
