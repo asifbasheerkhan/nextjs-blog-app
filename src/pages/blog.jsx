@@ -38,7 +38,9 @@ const blog = ({ posts }) => {
   }, [router]);
 
   if (!posts) {
-    return <div>Loading...</div>;
+    return (
+      <div>Loading...</div>
+    );
   }
   return (
     <>
