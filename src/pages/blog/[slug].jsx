@@ -112,12 +112,12 @@ const page = ({ post }) => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 min-h-screen flex justify-center items-start pt-16 pb-4">
-        <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg w-full h-full overflow-y-auto">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+      <div className="bg-gray-500 h-screen flex justify-center items-start pt-16 pb-4">
+        <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg w-full h-full overflow-y-auto">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
             <i>Title:</i> {post.title}
           </h1>
-          <p className="text-lg text-gray-700 mb-6">
+          <p className="text-lg text-gray-600 leading-relaxed">
             <i>
               <strong>Body:</strong>
             </i>
@@ -125,8 +125,8 @@ const page = ({ post }) => {
             {post.body}
           </p>
 
-          <div className="mt-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">
               Leave a Comment
             </h2>
             <form onSubmit={handleSubmit}>
@@ -134,33 +134,34 @@ const page = ({ post }) => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows="4"
-                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                cols="50"
+                className="w-full p-3 border border-gray-300 rounded-md"
                 placeholder="Write your comment here"
               />
               <br />
               <button
                 type="submit"
-                className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
               >
                 Submit Comment
               </button>
             </form>
 
-            {message && <p className="mt-4 text-gray-600">{message}</p>}
+            {message && <p className="mt-4 text-gray-700">{message}</p>}
 
             <div className="mt-8">
-              <h3 className="text-xl font-semibold text-gray-800">Comments</h3>
-              <div className="max-h-96 overflow-y-auto mt-4 space-y-4">
+              <h3 className="text-2xl font-semibold text-gray-700">Comments</h3>
+              <div className="max-h-96 overflow-y-auto mt-4">
                 {comments.length === 0 ? (
-                  <p className="text-gray-500">No comments yet.</p>
+                  <p>No comments yet.</p>
                 ) : (
-                  <ul>
+                  <ul className="space-y-4">
                     {comments.map((comment) => (
                       <li
                         key={comment.id}
-                        className="p-4 border border-gray-200 rounded-md bg-gray-50"
+                        className="p-4 border border-gray-300 rounded-md bg-gray-50"
                       >
-                        <p className="text-gray-700">{comment.comment}</p>
+                        <p>{comment.comment}</p>
                       </li>
                     ))}
                   </ul>
@@ -172,7 +173,6 @@ const page = ({ post }) => {
       </div>
     </>
   );
-
 };
 
 export default page;
